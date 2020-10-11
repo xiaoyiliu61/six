@@ -8,10 +8,9 @@ _ "DataCertPlatform/routers"
 
 func main() {
 	db_mysql.Connect()
-
+//设置静态资源文件映射
 	beego.SetStaticPath("/js", "./static/js")
-	beego.SetStaticPath("img", "./static/img")
-	beego.SetStaticPath("css", "./static/css")
-
+	beego.SetStaticPath("/css", "./static/css")
+	beego.SetStaticPath("/img", "./static/img")
 	beego.Run()
 }

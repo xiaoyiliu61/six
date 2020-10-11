@@ -6,5 +6,7 @@ import (
 )
 
 func init() {
+	//rootpath:路由
     beego.Router("/", &controllers.MainController{})
+
 }
