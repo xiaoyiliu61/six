@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c024029-2b68-4a84-9dbd-8b048997422f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controllers/register controller.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controllers/login.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/app.conf" beforeDir="false" afterPath="$PROJECT_DIR$/conf/app.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controllers/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/default.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/register controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/register controller.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_mysql/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/db_mysql/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routers/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/routers/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Go File" />
         <option value="HTML File" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -46,7 +47,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../beefile" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../spideProject_0601" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -74,9 +75,19 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
+    <configuration name="go build router.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="DataCertPlatform" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/routers/router.go" />
+      <package value="DataCertPlatform" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Build.go build router.go" />
         <item itemvalue="Go Build.go build register controller.go" />
       </list>
     </recent_temporary>
@@ -89,29 +100,49 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="477" y="67" key="#go_build_register_controller.go/0.0.1536.864@0.0.1536.864" timestamp="1602422262577" />
-    <state x="549" y="188" key="FileChooserDialogImpl" timestamp="1602336826082">
+    <state x="477" y="67" key="#go_build_router.go" timestamp="1602470072209">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="188" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1602336826082" />
-    <state width="1493" height="269" key="GridCell.Tab.0.bottom" timestamp="1602422983827">
+    <state x="477" y="67" key="#go_build_router.go/0.0.1536.864@0.0.1536.864" timestamp="1602470072209" />
+    <state x="549" y="188" key="FileChooserDialogImpl" timestamp="1602488573906">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="269" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1602422983827" />
-    <state width="1493" height="269" key="GridCell.Tab.0.center" timestamp="1602422983827">
+    <state x="549" y="188" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1602488573906" />
+    <state width="1493" height="269" key="GridCell.Tab.0.bottom" timestamp="1602488765689">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="269" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1602422983827" />
-    <state width="1493" height="269" key="GridCell.Tab.0.left" timestamp="1602422983827">
+    <state width="1493" height="269" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1602488765689" />
+    <state width="1493" height="269" key="GridCell.Tab.0.center" timestamp="1602488765689">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="269" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1602422983827" />
-    <state width="1493" height="269" key="GridCell.Tab.0.right" timestamp="1602422983827">
+    <state width="1493" height="269" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1602488765689" />
+    <state width="1493" height="269" key="GridCell.Tab.0.left" timestamp="1602488765689">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="269" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1602422983827" />
-    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1602340525792">
+    <state width="1493" height="269" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1602488765689" />
+    <state width="1493" height="269" key="GridCell.Tab.0.right" timestamp="1602488765689">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1602340525792" />
+    <state width="1493" height="269" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1602488765689" />
+    <state width="1493" height="277" key="GridCell.Tab.1.bottom" timestamp="1602473780899">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1602473780899" />
+    <state width="1493" height="277" key="GridCell.Tab.1.center" timestamp="1602473780899">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1602473780899" />
+    <state width="1493" height="277" key="GridCell.Tab.1.left" timestamp="1602473780899">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1602473780899" />
+    <state width="1493" height="277" key="GridCell.Tab.1.right" timestamp="1602473780899">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1602473780899" />
+    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1602485787400">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1602485787400" />
   </component>
 </project>

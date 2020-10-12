@@ -12,6 +12,6 @@ type MainController struct {
 func (c *MainController) Get() {
 	/*c.Data["Website"] = "beego.me"
 	c.Data["Email"] = "astaxie@gmail.com"*/
-	fmt.Println("helloword")
+	fmt.Println("HelloWord")
 	c.TplName = "register.html"
 }
