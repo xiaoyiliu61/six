@@ -1,10 +1,7 @@
 package db_mysql
 
 import (
-	"DataCertPlatform/models"
-	"crypto/md5"
 	"database/sql"
-	"encoding/hex"
 	"github.com/astaxie/beego"
 	_ "github.com/github.com/go-sql-driver/mysql"
 )
@@ -23,15 +20,15 @@ func Connect() {
 	//fmt.Println(dbDriver, dbUser, dbPassword)
 	//连接数据库
 	connUrl := dbUser + ":" + dbPassword + "@tcp(" + dbIp + ")/" + dbName + "?charset=utf8"
-	db,_ := sql.Open(dbDriver, connUrl)
-	/*if err != nil {
+	db,err:= sql.Open(dbDriver, connUrl)
+	if err != nil {
 		panic("数据连接失败，请检查配置")
-	}*/
+	}
 	Db = db
 	//fmt.Println(db)
 }
 //将用户信息保存到数据库中去的函数
-func AddUser(u models.User)(int64,error) {
+/*func AddUser(u models.User)(int64,error) {
 	//将密码进行hash计算，得到密码hash值，然后在存
 	md5Hash:=md5.New()
 	md5Hash.Write([]byte(u.Password))
@@ -48,6 +45,6 @@ func AddUser(u models.User)(int64,error) {
 		return -1,err
 	}
 	return row,nil
-}
+}*/
 
 

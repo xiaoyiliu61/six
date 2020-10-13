@@ -1,13 +1,8 @@
 package controllers
 
 import (
-	"DataCertPlatform/db_mysql"
 	"DataCertPlatform/models"
-	"crypto/md5"
-	"encoding/hex"
-	"fmt"
 	"github.com/astaxie/beego"
-
 )
 
 type RegisterController struct {
@@ -22,10 +17,13 @@ func (r *RegisterController) Post() {
 		r.Ctx.WriteString("抱歉，数据请求失败，请重试")
 		return
 	}
-	r.TplName="register.html"
-	r.TplName="login.html"
+
    //2.将解析的数据保存到数据库中
-    row,err:=db_mysql.AddUser(user)
+   _,err=user.AddUser()
+	if err != nil {
+		r.Ctx.WriteString("抱歉")
+	}
+    /*row,err:=db_mysql.AddUser(user)
 	if err != nil {
 		fmt.Println(err.Error())
 		r.Ctx.WriteString("用户信息注册失败")
@@ -35,9 +33,9 @@ func (r *RegisterController) Post() {
 	fmt.Println(row)
     md5Hash:=md5.New()
     md5Hash.Write([]byte(user.Password))
-    user.Password=hex.EncodeToString(md5Hash.Sum(nil))
+    user.Password=hex.EncodeToString(md5Hash.Sum(nil))*/
 	//3.将处理结果返回到客户端浏览器
-
+	r.TplName="login.html"
 
 
 }
