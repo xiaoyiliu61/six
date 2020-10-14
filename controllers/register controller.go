@@ -23,17 +23,7 @@ func (r *RegisterController) Post() {
 	if err != nil {
 		r.Ctx.WriteString("抱歉")
 	}
-    /*row,err:=db_mysql.AddUser(user)
-	if err != nil {
-		fmt.Println(err.Error())
-		r.Ctx.WriteString("用户信息注册失败")
-		r.TplName="err.html"
-		return
-	}
-	fmt.Println(row)
-    md5Hash:=md5.New()
-    md5Hash.Write([]byte(user.Password))
-    user.Password=hex.EncodeToString(md5Hash.Sum(nil))*/
+
 	//3.将处理结果返回到客户端浏览器
 	r.TplName="login.html"
 
