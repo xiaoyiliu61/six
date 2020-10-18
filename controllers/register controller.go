@@ -21,7 +21,8 @@ func (r *RegisterController) Post() {
    //2.将解析的数据保存到数据库中
    _,err=user.AddUser()
 	if err != nil {
-		r.Ctx.WriteString("抱歉")
+		r.Ctx.WriteString("抱歉，用户注册失败，请重试")
+		return
 	}
 
 	//3.将处理结果返回到客户端浏览器

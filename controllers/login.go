@@ -28,7 +28,7 @@ func (l *LoginController) Post()  {
 	//3.判断数据库查询结果
 	if err != nil {
 			fmt.Println(err.Error())
-			l.Ctx.WriteString("抱歉，登录失败")
+			l.Ctx.WriteString("抱歉，登录失败啊")
 			return
 	}
 	//4.根据查询结果返回客户端相应的信息或页面跳转

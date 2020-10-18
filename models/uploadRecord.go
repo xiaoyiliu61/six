@@ -10,12 +10,13 @@ type UploadRecord struct {
 	FileCert string
 	FileTitle string
 	CertTime int64
+	Phone string
 }
 
 func (u UploadRecord) SaveRecord()(int64,error) {
-	rs,err:=db_mysql.Db.Exec("insert into upload_record(user_id,file_name,file_size,file_cert,file_title,cert_time)" +
+	rs,err:=db_mysql.Db.Exec("insert into upload_record(user_id,file_name,file_size,file_cert,file_title,cert_time,phone)" +
 		"values (?,?,?,?,?,?)",
-		u.UserId,u.FileName,u.FileSize,u.FileCert,u.FileTitle,u.CertTime)
+		u.FileName,u.FileSize,u.FileCert,u.FileTitle,u.CertTime,u.Phone)
 	if err != nil {
 		return -1,err
 	}
