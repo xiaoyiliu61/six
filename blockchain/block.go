@@ -1,6 +1,10 @@
 package blockchain
 
-import "time"
+import (
+	"DataCertPlatform/utils"
+	"bytes"
+	"time"
+)
 
 /*
 定义区块结构体，用于表示区块
@@ -23,6 +27,22 @@ func NewBlock(height int64,provHash []byte,data []byte) Block  {
 		Data:      data,
 		Version:   "0x01",
 	}
+	//1.将block结构体数据转换为[]byte类型
+	heightBytes,_:=In64ToByte(block.Height)
+	timeStampBytes,_:=In64ToByte(block.TimeStamp)
+	versionBytes:=StringToBytes(block.Version)
+
+	var blockBytes []byte
+	//bytes.join 拼接
+	bytes.Join([][]byte{
+		heightBytes,
+		timeStampBytes,
+		block.PrevHash,
+		block.Data,
+		versionBytes,
+	},[]byte{})
+
+	block.Hash = utils.SHA256HashBlock(blockBytes)
 	return block
 }
 

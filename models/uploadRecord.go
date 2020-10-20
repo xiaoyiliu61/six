@@ -1,6 +1,9 @@
 package models
 
-import "DataCertPlatform/db_mysql"
+import (
+	"DataCertPlatform/db_mysql"
+	"DataCertPlatform/utils"
+)
 
 /**
  * 上传文件的记录
@@ -13,6 +16,7 @@ type UploadRecord struct {
 	FileCert  string
 	FileTitle string
 	CertTime  int64
+	CertTimeFormat string
 }
 
 /**
@@ -47,6 +51,8 @@ func QueryRecordsByUserId(userId int) ([]UploadRecord, error) {
 		if err != nil {
 			return nil, err
 		}
+		tStr := utils.TimeFormat(record.CertTime, utils.TIME_FORMAT_THREE)
+		record.CertTimeFormat = tStr
 		records = append(records, record)
 	}
 	return records, nil

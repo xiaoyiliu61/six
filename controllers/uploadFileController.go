@@ -57,7 +57,8 @@ func (u *UploadFileController) Post() {
 
 	//把上传的文件作为记录保存到数据库当中
 	//① 计算md5值
-	md5String, err := utils.MD5HashReader(file)
+	saveFile,err:=os.Open(saveFilePath)
+	md5String, err := utils.MD5HashReader(saveFile)
 	if err != nil {
 		u.Ctx.WriteString("抱歉, 电子数据认证失败。")
 		return

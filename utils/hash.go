@@ -41,3 +41,15 @@ func SHA256HashReader(reader io.Reader) (string,error) {
 	hashBytes:=sha256Hash.Sum(nil)
 	return hex.EncodeToString(hashBytes),nil
 }
+/*
+对区块数据进行SHA256哈希计算
+*/
+func SHA256HashBlock(bs []byte) []byte{
+	//2.对转换后的[]byte字节切片输入Write方法
+	sha256Hash:=sha256.New()
+	sha256Hash.Write(bs)
+	hash:=sha256Hash.Sum(nil)
+	return hash
+
+
+}
