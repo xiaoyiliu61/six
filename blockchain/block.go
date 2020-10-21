@@ -17,8 +17,11 @@ type Block struct {
 	Data []byte //数据字段
 	Hash []byte //当前区块的hash值
 	Version string //版本号
+	Nonce int64 //区块对应的nonce值
 }
-
+/*
+创建一个新区块
+*/
 func NewBlock(height int64,provHash []byte,data []byte) Block  {
 	block:=Block{
 		Height:    height,
@@ -28,9 +31,9 @@ func NewBlock(height int64,provHash []byte,data []byte) Block  {
 		Version:   "0x01",
 	}
 	//1.将block结构体数据转换为[]byte类型
-	heightBytes,_:=In64ToByte(block.Height)
-	timeStampBytes,_:=In64ToByte(block.TimeStamp)
-	versionBytes:=StringToBytes(block.Version)
+	heightBytes,_:=utils.In64ToByte(block.Height)
+	timeStampBytes,_:=utils.In64ToByte(block.TimeStamp)
+	versionBytes:=utils.StringToBytes(block.Version)
 
 	var blockBytes []byte
 	//bytes.join 拼接
