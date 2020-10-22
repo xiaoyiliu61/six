@@ -1,14 +1,15 @@
 package blockchain
 
 import (
-	"DataCertPlatform/utils"
 	"bytes"
+	"encoding/gob"
 	"time"
 )
 
 /*
 定义区块结构体，用于表示区块
 */
+var hash []byte
 
 type Block struct {
 	Height int64 //区块的高度，第几个区块
@@ -30,22 +31,28 @@ func NewBlock(height int64,provHash []byte,data []byte) Block  {
 		Data:      data,
 		Version:   "0x01",
 	}
-	//1.将block结构体数据转换为[]byte类型
+	xiaoyi:=NewPow(block)
+	hash,nonce:=xiaoyi.Run()
+	block.Nonce=nonce
+    block.Hash = hash
+	/*//1.将block结构体数据转换为[]byte类型
 	heightBytes,_:=utils.In64ToByte(block.Height)
-	timeStampBytes,_:=utils.In64ToByte(block.TimeStamp)
+	timeBytes,_:=utils.In64ToByte(block.TimeStamp)
 	versionBytes:=utils.StringToBytes(block.Version)
+    nonceBytes,_:=utils.In64ToByte(block.Nonce)
 
 	var blockBytes []byte
 	//bytes.join 拼接
 	bytes.Join([][]byte{
 		heightBytes,
-		timeStampBytes,
+		timeBytes,
 		block.PrevHash,
 		block.Data,
 		versionBytes,
+		nonceBytes,
 	},[]byte{})
 
-	block.Hash = utils.SHA256HashBlock(blockBytes)
+	block.Hash = utils.SHA256HashBlock(blockBytes)*/
 	return block
 }
 
@@ -58,3 +65,19 @@ func CreateGenesisBlock() Block  {
 	return genesisBlock
 }
 
+func (b Block) Serialize() ([]byte) {
+	buff:=new(bytes.Buffer) //缓冲区
+	encoder:=gob.NewEncoder(buff)
+	encoder.Encode(b) //将区块b放入到序列化编码器中
+	return buff.Bytes()
+}
+
+func DeSerialize(data []byte) (*Block,error) {
+	var block Block
+	decoder:=gob.NewDecoder(bytes.NewReader(data))
+    err:=decoder.Decode(&block)
+	if err != nil {
+		return nil,err
+	}
+	return &block,nil
+}
