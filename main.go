@@ -23,7 +23,7 @@ func main() {
 
 	/* 序列化：Marshal
 	   将数据从内存中形式转换为可以持久化存储在硬盘上或者在网络上传输的形式，称为序列化
-	  反序列化：
+	  反序列化：Unmarshal
 	*/
     blockJson,_:=json.Marshal(block0)
     fmt.Println("通过json序列化以后的block：",string(blockJson))
