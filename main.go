@@ -12,7 +12,6 @@ _ "DataCertPlatform/routers"
 func main() {
 
 	block0:=blockchain.CreateGenesisBlock()//创建创世区块
-	fmt.Printf("block0的哈希：%x\n",block0.Hash)
 	block1:=blockchain.NewBlock(
 		block0.Height+1,
 		block0.Hash,
@@ -20,6 +19,16 @@ func main() {
 	fmt.Printf("block0的哈希：%x\n",block0.Hash)
 	fmt.Printf("block1的哈希：%x\n",block1.Hash)
 	fmt.Printf("block1的PrevHash：%x\n",block1.PrevHash)
+
+	block0Bytes:=block0.Serialize()
+	fmt.Println("创世区块gob序列化后：",block0Bytes)
+    deBlock0,err:=blockchain.DeSerialize(block0Bytes)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println("反序列化后的区块高度是：",deBlock0.Height)
+    return
 
 	/* 序列化：Marshal
 	   将数据从内存中形式转换为可以持久化存储在硬盘上或者在网络上传输的形式，称为序列化
