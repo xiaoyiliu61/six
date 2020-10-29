@@ -4,12 +4,11 @@ import (
 	"DataCertPlatform/blockchain"
 	"DataCertPlatform/db_mysql"
 	_ "DataCertPlatform/routers"
-	"fmt"
 	"github.com/astaxie/beego"
 )
 
 func main() {
-
+    blockchain.NewBlockChain()
 /*	block0:=blockchain.CreateGenesisBlock()//创建创世区块
 	block1:=blockchain.NewBlock(
 		block0.Height+1,
@@ -36,10 +35,26 @@ func main() {
     blockJson,_:=json.Marshal(block0)
     fmt.Println("通过json序列化以后的block：",string(blockJson))*/
 
-    bc:=blockchain.NewBlockChain()
-    fmt.Printf("创世区块的哈希值：%x\n",bc.LastHash)
-    bc.SaveData([]byte("用户要保存数据"))
-	return
+/*    bc:=blockchain.NewBlockChain()
+    bc.SaveData([]byte("区块链学院2019级C190604班"))
+    blocks,err:=bc.QueryAllBlocks()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	for index,block:=range blocks {
+		fmt.Printf("序号：%d\n,区块高度：%d\n,",index,block.Height)
+	}*/
+  /*  block1,err:=bc.SaveData([]byte("用户要保存数据"))
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Printf("区块高度：%d\n",block1.Height)
+	fmt.Printf("区块的hash值：%d\n",block1.Hash)
+	fmt.Printf("区块的前Prevhash值：%d\n",block1.PrevHash)*/
+
+
 
 
 	db_mysql.Connect()
