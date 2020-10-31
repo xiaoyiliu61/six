@@ -4,6 +4,7 @@ import (
 	"DataCertPlatform/models"
 	"fmt"
 	"github.com/astaxie/beego"
+	"strings"
 )
 
 type LoginController struct {
@@ -39,6 +40,11 @@ func (l *LoginController) Post(){
 		// sql: no rows in result set(集合），结果集中没有数据
 		fmt.Println(err.Error())
 		l.Ctx.WriteString("抱歉，用户登录失败，请重试")
+		return
+	}
+	if strings.TrimSpace(u.Name)==""||strings.TrimSpace(u.Card)=="" {
+		l.Data["Phone"]=user.Phone
+		l.TplName="user_kyc.html"
 		return
 	}
 

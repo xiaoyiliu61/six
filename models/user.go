@@ -9,6 +9,21 @@ type User struct {
 	Id       int    `form:"id"`
 	Phone    string `form:"phone"`
 	Password string `form:"password"`
+	Name string `from:"name"`
+	Card string `from:"card"`
+	Sex string `from:"sex"`
+}
+
+func (u User) UpdateUser() (int64,error){
+	rs,err:=db_mysql.Db.Exec("update user set  name  = ?, card = ?,sex = ?where phone =?",u.Name,u.Card,u.sex,u.Phone)
+	if err != nil {
+		return -1,err
+	}
+	id,err:=rs.RowsAffected()
+	if err != nil {
+		return -1,err
+	}
+	return id,nil
 }
 
 /**
@@ -40,10 +55,10 @@ func (u User) QueryUser() (*User, error) {
 	//把脱敏的密码的md5值重新赋值为密码进行存储
 	u.Password = utils.MD5HashString(u.Password)
 
-	row := db_mysql.Db.QueryRow("select phone from user where phone = ? and password = ?",
+	row := db_mysql.Db.QueryRow("select phone,name,card from user where phone = ? and password = ?",
 		u.Phone, u.Password)
 
-	err := row.Scan(&u.Phone)
+	err := row.Scan(&u.Phone,&u.Name,&u.Card)
 	if err != nil {
 		return nil, err
 	}

@@ -3,7 +3,6 @@ package blockchain
 import (
 	"DataCertPlatform/utils"
 	"bytes"
-	"fmt"
 	"math/big"
 )
 
@@ -51,7 +50,7 @@ func (p ProofOfWork) Run() ([]byte,int64){
 	var hashBig *big.Int
 	hashBig=new(big.Int)
 	hashBig=hashBig.SetBytes(blockHash)
-	fmt.Println("当前尝试的Nonce值：",nonce)
+	//fmt.Println("当前尝试的Nonce值：",nonce)
 	if hashBig.Cmp(target)==-1 {
 		break
 	}
