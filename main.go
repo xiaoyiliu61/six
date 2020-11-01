@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	//先准备一条区块链
     blockchain.NewBlockChain()
 /*	block0:=blockchain.CreateGenesisBlock()//创建创世区块
 	block1:=blockchain.NewBlock(

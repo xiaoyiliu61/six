@@ -13,9 +13,11 @@ type User struct {
 	Card string `from:"card"`
 	Sex string `from:"sex"`
 }
-
+/*
+该方法用于更新数据库中用户记录的实名认证信息
+*/
 func (u User) UpdateUser() (int64,error){
-	rs,err:=db_mysql.Db.Exec("update user set  name  = ?, card = ?,sex = ?where phone =?",u.Name,u.Card,u.sex,u.Phone)
+	rs,err:=db_mysql.Db.Exec("update user set  name  = ?, card = ?,sex = ?where phone =?",u.Name,u.Card,u.Sex,u.Phone)
 	if err != nil {
 		return -1,err
 	}
