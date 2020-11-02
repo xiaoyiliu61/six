@@ -9,14 +9,14 @@ import (
  * 上传文件的记录
  */
 type UploadRecord struct {
-	Id        int
-	UserId    int
-	FileName  string
-	FileSize  int64
-	FileCert  string
-	FileTitle string
-	CertTime  int64
-	CertTimeFormat string
+	Id             int
+	UserId         int
+	FileName       string
+	FileSize       int64
+	FileCert       string //认证号：md5值
+	FileTitle      string
+	CertTime       int64
+	CertTimeFormat string // 仅作为格式化展示使用的字段
 }
 
 /**
@@ -51,6 +51,7 @@ func QueryRecordsByUserId(userId int) ([]UploadRecord, error) {
 		if err != nil {
 			return nil, err
 		}
+		//整形 --> 字符串:xxxx年mm月dd日 hh:MM:ss
 		tStr := utils.TimeFormat(record.CertTime, utils.TIME_FORMAT_THREE)
 		record.CertTimeFormat = tStr
 		records = append(records, record)
