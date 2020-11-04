@@ -1,14 +1,14 @@
 package controllers
 
 import (
-	"DataCertPlatform/blockchain"
-	"DataCertPlatform/models"
-	"DataCertPlatform/utils"
-	"fmt"
 	"github.com/astaxie/beego"
-	"os"
+	"fmt"
 	"strings"
+	"os"
+	"DataCertPlatform/models"
 	"time"
+	"DataCertPlatform/utils"
+	"DataCertPlatform/blockchain"
 )
 
 /**
@@ -46,7 +46,7 @@ func (u *UploadFileController) Post() {
 
 	//3、计算文件的SHA256值
 	fileHash, err := utils.SHA256HashReader(file)
-	fmt.Println(fileHash)
+	//fmt.Println(fileHash)
 
 	//先查询用户id
 	user1, err := models.User{Phone: phone}.QueryUserByPhone()
@@ -58,7 +58,7 @@ func (u *UploadFileController) Post() {
 
 	//把上传的文件作为记录保存到数据库当中
 	//① 计算md5值
-	saveFile,err:=os.Open(saveFilePath)
+	saveFile, err := os.Open(saveFilePath)
 	md5String, err := utils.MD5HashReader(saveFile)
 	if err != nil {
 		u.Ctx.WriteString("抱歉, 电子数据认证失败。")
@@ -80,15 +80,31 @@ func (u *UploadFileController) Post() {
 		return
 	}
 
-
-
-	//将用户上传的文件的md5值和sha256值保存到区块链上，即数据上链
-	block,err:=blockchain.CHAIN.SaveData([]byte(md5String))
+	user := &models.User{
+		Phone: phone,
+	}
+	user, _ = user.QueryUserByPhone()
+	fmt.Println("用户的信息：", user.Name, user.Phone, user.Card)
+	//③ 将用户上传的文件的md5值和sha256值保存到区块链上，即数据上链
+	certRecord := models.CertRecord{
+		CertId:   []byte(md5String),
+		CertHash: []byte(fileHash),
+		CertName: user.Name,
+		CertCard: user.Card,
+		Phone:    user.Phone,
+		FileName: header.Filename,
+		FileSize: header.Size,
+		CertTime: time.Now().Unix(),
+	}
+	//序列化
+	certBytes, _ := certRecord.Serialize()
+	_, err = blockchain.CHAIN.SaveData(certBytes)
 	if err != nil {
-		u.Ctx.WriteString("抱歉数据上链错误："+err.Error())
+		u.Ctx.WriteString("抱歉，数据上链错误：" + err.Error())
 		return
 	}
-	fmt.Println("恭喜，已经保存到区块链中，区块高度是：",block.Height)
+	//fmt.Println("恭喜，已经数据保存到区块链中，区块高度是:", block.Height)
+
 	//上传文件保存到数据库中成功
 	records, err := models.QueryRecordsByUserId(user1.Id)
 	if err != nil {
@@ -109,7 +125,7 @@ func (u *UploadFileController) Post1() {
 	title := u.Ctx.Request.PostFormValue("upload_title") //用户输入的标题
 
 	//用户上传的文件
-	file, header, err := u.GetFile("xiaoyiliu")
+	file, header, err := u.GetFile("yuhongwei")
 	if err != nil { //解析客户端提交的文件出现错误
 		u.Ctx.WriteString("抱歉，文件解析失败，请重试！")
 		return

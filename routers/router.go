@@ -14,6 +14,8 @@ func init() {
     beego.Router("/login",&controllers.LoginController{})
     //请求直接登录的页面
     beego.Router("/login.html",&controllers.LoginController{})
+
+    beego.Router("/login_sms.html",&controllers.LoginSmsController{})
     //用户上传文件的功能
     beego.Router("/upload",&controllers.UploadFileController{})
     //查看认证数据证书页面
