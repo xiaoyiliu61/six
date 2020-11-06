@@ -1,6 +1,7 @@
 package models
 
 type SmsLogin struct {
+   BizId string `form:"biz_id"`
    Phone string `form:"phone"`
-   code string `form:"code"`
+   Code string `form:"code"`
 }

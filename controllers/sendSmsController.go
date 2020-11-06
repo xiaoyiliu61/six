@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"DataCertPlatform/models"
+	"fmt"
 	"github.com/astaxie/beego"
 	"DataCertPlatform/utils"
 	"time"
@@ -12,10 +13,11 @@ type SentSmsController struct {
 }
 
 func (s *SentSmsController) Post() {
+	fmt.Println("发送验证码")
 	var smsLogin models.SmsLogin
 	err:=s.ParseForm(&smsLogin)
 	if err != nil {
-		s.Ctx.WriteString("")
+		s.Ctx.WriteString("发送验证码失败，请重试！")
 		return
 	}
 	phone:=smsLogin.Phone
@@ -39,12 +41,12 @@ func (s *SentSmsController) Post() {
 	}
 	_,err=smsRecord.SaveSmsRecord()
 	if err != nil {
-		s.Ctx.WriteString("")
+		s.Ctx.WriteString("抱歉，获取验证码失败，请重试！")
 		return
 	}
 	//保存成功 bizId
 	s.Data["Phone"]=smsLogin.Phone
 	s.Data["BizId"]=smsRecord.BizId
 	//验证码登录
-	s.TplName="login_sms.html"
+	s.TplName="login_sms_second.html"
 }
